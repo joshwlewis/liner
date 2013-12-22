@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Liner::VERSION
   spec.authors       = ["Josh Lewis"]
   spec.email         = ["josh.w.lewis@gmail.com"]
-  spec.description   = %q{Bone Liner for Ruby Classes}
-  spec.summary       = %q{Easily add attribute, inspection, and equality methods to your Plain Old Ruby Object}
+  spec.description   = %q{A liner for Ruby objects. Add attribute, inspection, and equality methods.}
+  spec.summary       = %q{A liner for Ruby objects. Add attribute, inspection, and equality methods.}
   spec.homepage      = "https://github.com/joshwlewis/liner"
   spec.license       = "MIT"
 

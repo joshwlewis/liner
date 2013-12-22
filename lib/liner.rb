@@ -1,5 +1,7 @@
 class Liner
+
   VERSION = '0.0.1'
+
   class << self
     def new(*args)
       self < Liner ? super(*args) : new_subclass(*args)
@@ -7,7 +9,7 @@ class Liner
     
     def new_subclass(*keys)
       Class.new(self) do |klass|
-        self.table_keys = (table_keys + keys).uniq
+        self.table_keys = (table_keys + keys.map(&:to_sym)).uniq
       end
     end
 
@@ -34,11 +36,9 @@ class Liner
     end
     protected :table_keys=
   end
-  attr_reader :table
-  protected :table
 
   def initialize(hash=nil)
-    @table = table_keys.inject({}){ |h,k| h[k]=nil;h }
+    @table = table_keys.inject({}){ |h,k| h[k]=nil; h }
     if hash
       hash.each do |k,v|
         self[k] = hash[k]
@@ -62,6 +62,23 @@ class Liner
     else
       raise ArgumentError, "Invalid liner attribute: '#{key}'."
     end
+  end
+
+  def to_h
+    @table.dup
+  end
+
+  attr_reader :table
+  protected :table
+
+  def ==(other)
+    return false unless other.class == self.class
+    @table == other.table
+  end
+
+  def eql?(other)
+    return false unless other.class == self.class
+    @table.eql?(other.table)
   end
 
   def inspect
