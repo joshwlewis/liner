@@ -39,11 +39,23 @@ describe Beer do
 
   describe "#==" do
     it "should return true when hashes are equal" do
-      Beer.new(name: 'Spaten').must_equal Beer.new(name: 'Spaten')
+      subject.must_be :==, Beer.new(name: 'Pabst')
     end
     it "should return false when hashes are not equal" do
-      Beer.new(name: 'Spaten').wont_equal Beer.new(name: 'Paulaner')
+      subject.wont_be :==, Beer.new(name: 'Natural Light')
     end
+  end
+  describe "#eql?" do
+    it "should return true when hashes are equal" do
+      subject.must_be :eql?, Beer.new(name: 'Pabst')
+    end
+    it "should return false when hashes are not equal" do
+      subject.wont_be :eql?, Beer.new(name: 'Natural Light')
+    end
+  end
+
+  it "#to_h should return the table" do
+    subject.to_h.must_equal name: 'Pabst'
   end
 end
 
