@@ -1,8 +1,8 @@
-class Marrow
+class Liner
   VERSION = '0.0.1'
   class << self
     def new(*args)
-      self < Marrow ? super(*args) : new_subclass(*args)
+      self < Liner ? super(*args) : new_subclass(*args)
     end
     
     def new_subclass(*keys)
@@ -60,7 +60,7 @@ class Marrow
     if table_keys.include?(key)
       @table[key] = value
     else
-      raise ArgumentError, "Invalid marrow attribute: '#{key}'."
+      raise ArgumentError, "Invalid liner attribute: '#{key}'."
     end
   end
 

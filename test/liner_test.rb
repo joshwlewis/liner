@@ -1,23 +1,23 @@
 require 'minitest/autorun'
 
-describe Marrow do
+describe Liner do
   it "::new_subclass must create a new class" do
-    Marrow.new_subclass(:a).must_be :<, Marrow
+    Liner.new_subclass(:a).must_be :<, Liner
   end
 
   it "::new must create a new class" do
-    Marrow.new(:a).must_be :<, Marrow
+    Liner.new(:a).must_be :<, Liner
   end
 end
 
-class Beer < Marrow.new(:name)
+class Beer < Liner.new(:name)
 end
 
 describe Beer do
   subject { Beer.new(name: "High Life") }
   it "::new must create a new instance" do
     subject.must_be_instance_of Beer
-    subject.must_be_kind_of Marrow
+    subject.must_be_kind_of Liner
   end
   it "#name must return the name" do
     subject.name.must_equal "High Life"
@@ -31,7 +31,7 @@ describe PaleAle do
   it "::new must create a new instance" do
     subject.must_be_instance_of PaleAle
     subject.must_be_kind_of Beer
-    subject.must_be_kind_of Marrow
+    subject.must_be_kind_of Liner
   end
 
   it "#name must get the name" do

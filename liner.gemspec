@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'marrow'
+require 'liner'
 
 Gem::Specification.new do |spec|
-  spec.name          = "marrow"
-  spec.version       = Marrow::VERSION
+  spec.name          = "liner"
+  spec.version       = Liner::VERSION
   spec.authors       = ["Josh Lewis"]
   spec.email         = ["josh.w.lewis@gmail.com"]
-  spec.description   = %q{Bone Marrow for Ruby Classes}
+  spec.description   = %q{Bone Liner for Ruby Classes}
   spec.summary       = %q{Easily add attribute, inspection, and equality methods to your Plain Old Ruby Object}
-  spec.homepage      = "https://github.com/joshwlewis/marrow"
+  spec.homepage      = "https://github.com/joshwlewis/liner"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
