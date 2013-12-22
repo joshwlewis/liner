@@ -1,18 +1,18 @@
 class Marrow
   VERSION = '0.0.1'
   class << self
-    def new_class(*keys)
+    def new(*args)
+      self < Marrow ? super(*args) : new_subclass(*args)
+    end
+    
+    def new_subclass(*keys)
       Class.new(self) do |klass|
-        self.table_keys = (keys + superclass.table_keys).uniq
+        self.table_keys = (table_keys + keys).uniq
       end
     end
 
-    def new(*args)
-      if self < Marrow
-        super(*args)
-      else
-        new_class(*args)
-      end
+    def inherited(child)
+      child.table_keys = (child.table_keys + self.table_keys).uniq
     end
 
     def table_keys
