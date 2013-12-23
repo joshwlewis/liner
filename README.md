@@ -1,6 +1,27 @@
 # Liner
 
-TODO: Write a gem description
+Lay a liner for your basic Ruby classes. Basically, it's a solid foundation for a PORO (Plain Old Ruby Object). A Liner is something like a more flexible Struct or a less magical OpenStruct, with a focus on enhanced inheritablity.
+
+## Usage
+
+```ruby
+# Let your class inherit from Liner and specify your attributes
+class Engine < Liner.new(:name, :fuel)
+end
+
+# Then you get a hash based initializer and a nice inspector:
+e = Engine.new(name: 'V8', fuel: "gasoline") # => #<Engine name="V8",
+fuel="gasoline">
+
+# Attribute getters and setters are built in
+e.fuel # => "gasoline"
+e.fuel = "diesel" # => "diesel"
+
+# Attributes are accessible via hash-style lookup too
+e[:name] # => "V8"
+e[:name] = "V6" # => "V6"
+e[:foo] = "Bar" # => ArgumentError: Invalid liner attribute: 'foo'
+```
 
 ## Installation
 
@@ -16,9 +37,7 @@ Or install it yourself as:
 
     $ gem install liner
 
-## Usage
 
-TODO: Write usage instructions here
 
 ## Contributing
 
