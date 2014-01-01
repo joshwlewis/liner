@@ -6,7 +6,11 @@ class Liner
     def new(*args)
       self < Liner ? super(*args) : new_subclass(*args)
     end
-    
+
+    def json_create(o)
+      new o['table']
+    end
+
     def new_subclass(*keys)
       Class.new(self) do |klass|
         self.table_keys = (table_keys + keys.map(&:to_sym)).uniq
@@ -84,5 +88,13 @@ class Liner
   def inspect
     attribute_string = @table.map{|k,v| "#{k}=#{v.inspect}"}.join(', ')
     "#<#{self.class} #{attribute_string}>"
+  end
+
+  def as_json(*)
+    { 'json_class' => self.class.name, 'table' => table }
+  end
+
+  def to_json(*args)
+    as_json.to_json(*args)
   end
 end
