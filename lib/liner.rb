@@ -19,7 +19,7 @@ def Liner.new(*keys)
 end
 
 def Liner.apply(base, *keys)
-  keys = keys.map(&:to_sym).uniq
+  keys = keys.map(&:to_sym).uniq.freeze
   base.class_eval do
     define_method(:liner_keys){ keys }
     include Liner

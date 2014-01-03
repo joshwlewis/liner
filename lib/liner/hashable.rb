@@ -22,6 +22,12 @@ module Liner
       end
     end
 
+    def liner_values=(values)
+      values.each_with_index do |v,i|
+        self[liner_keys[i]] = v
+      end
+    end
+
     def to_h
       liner.dup
     end
