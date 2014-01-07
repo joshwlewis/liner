@@ -31,6 +31,7 @@ module Liner
     def to_h
       liner.dup
     end
+    alias :to_hash :to_h
     
   end
 end
