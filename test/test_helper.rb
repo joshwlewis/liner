@@ -10,6 +10,8 @@ Beer = Liner.new :hops, :yeast
 class Pizza < Liner.new(:crust, :sauce)
 end
 
-class Burger
-  liner :bun, :meat, :cheese
+Burger = Liner.new(:bun, :meat)
+
+class Cheeseburger < Burger
+  liner :cheese
 end

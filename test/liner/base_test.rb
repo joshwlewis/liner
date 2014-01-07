@@ -6,7 +6,7 @@ describe Liner::Base do
       beer.yeast.must_equal 'Top Fermenting'
     end
     it "should accept a list of values" do
-      burger = Burger.new('Sesame Seed', 'Soy', 'Cheddar')
+      burger = Cheeseburger.new('Sesame Seed', 'Soy', 'Cheddar')
       burger.bun.must_equal 'Sesame Seed'
       burger.cheese.must_equal 'Cheddar'
     end
