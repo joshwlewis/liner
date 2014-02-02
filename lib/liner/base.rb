@@ -5,7 +5,7 @@ module Liner
         self.liner = args.first
       elsif args.count >= 1 && args.count <= liner_keys.count
         self.liner_values = args
-      else
+      elsif !args.empty?
         raise ArgumentError, "Liner doesn't know how to initialize with `#{args}`."
       end
     end

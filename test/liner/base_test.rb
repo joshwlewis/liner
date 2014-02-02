@@ -10,5 +10,10 @@ describe Liner::Base do
       burger.bun.must_equal 'Sesame Seed'
       burger.cheese.must_equal 'Cheddar'
     end
+    it "should accept no arguments" do
+      burger = Cheeseburger.new
+      burger.bun.must_equal nil
+      burger.cheese.must_equal nil
+    end
   end
 end
