@@ -1,35 +1,34 @@
 module Liner
   module Hashable
 
-    def liner
-      @liner ||= liner_keys.inject({}) { |h,k| h[k]=nil; h }
-    end
-
-    def liner=(hash)
-      hash.each { |k,v| self[k] = hash[k] }
-    end
-
     def [](key)
-      liner[key.to_sym]
+      send key.to_sym
+    rescue NoMethodError
+      read_attribute key
     end
 
     def []=(key,value)
-      key = key.to_sym
-      if liner_keys.include?(key)
-        liner[key] = value
-      else
-        raise ArgumentError, "Invalid liner attribute: '#{key}'."
-      end
+      send :"#{key}=", value
+    rescue NoMethodError
+      write_attribute key, value
     end
 
-    def liner_values=(values)
-      values.each_with_index do |v,i|
-        self[liner_keys[i]] = v
+    def hash
+      keys.inject({}) { |h,k| h[k] = self[k]; h }.freeze
+    end
+
+    def hash=(hash)
+      hash.each { |k,v| self[k] = hash[k] }
+    end
+
+    def values=(values)
+      values.each_with_index do |value, i|
+        write_attribute(keys[i], value)
       end
     end
 
     def to_h
-      liner.dup
+      hash.dup
     end
     alias :to_hash :to_h
     

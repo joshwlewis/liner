@@ -2,12 +2,12 @@ module Liner
   module Equalizable
     def ==(other)
       return false unless other.class == self.class
-      liner == other.liner
+      hash == other.hash
     end
 
     def eql?(other)
       return false unless other.class == self.class
-      liner.eql?(other.liner)
+      hash.eql?(other.hash)
     end
   end
 end

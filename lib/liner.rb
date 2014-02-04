@@ -21,7 +21,7 @@ end
 def Liner.apply(base, *keys)
   keys = keys.map(&:to_sym).uniq.freeze
   base.class_eval do
-    define_method :liner_keys do
+    define_method :keys do
       begin
         (super() + keys).uniq
       rescue NoMethodError
@@ -30,8 +30,8 @@ def Liner.apply(base, *keys)
     end
     include Liner
     keys.each do |key|
-      define_method(key){ self[key] }
-      define_method("#{key}="){ |value| self[key] = value }
+      define_method(key){ read_attribute(key) }
+      define_method("#{key}="){ |value| write_attribute(key, value) }
     end
   end
   base
