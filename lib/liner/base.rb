@@ -3,10 +3,10 @@ module Liner
     def initialize(*args)
       # initialize by a hash
       if args.count == 1 && args.first.respond_to?(:keys)
-        self.hash = args.first
+        self.liner = args.first
       # initialize by ordered values
-      elsif args.count >= 1 && args.count <= keys.count
-        self.values = args
+      elsif args.count >= 1 && args.count <= liner_keys.count
+        self.liner_values = args
       elsif !args.empty?
         raise ArgumentError, "Liner doesn't know how to initialize with `#{args}`."
       end
@@ -15,14 +15,14 @@ module Liner
 
   private
 
-  def read_attribute(key)
+  def read_liner(key)
     key = key.to_sym
     with_valid_attribute(key) do
       instance_variable_get "@#{key}"
     end
   end
 
-  def write_attribute(key, value)
+  def write_liner(key, value)
     key = key.to_sym
     with_valid_attribute(key) do
       instance_variable_set "@#{key}", value
@@ -30,7 +30,7 @@ module Liner
   end
 
   def with_valid_attribute(key, &block)
-    if keys.include?(key)
+    if liner_keys.include?(key)
       yield
     else
       raise ArgumentError, "Invalid liner attribute: '#{key}'"

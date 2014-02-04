@@ -4,31 +4,31 @@ module Liner
     def [](key)
       send key.to_sym
     rescue NoMethodError
-      read_attribute key
+      read_liner key
     end
 
     def []=(key,value)
       send :"#{key}=", value
     rescue NoMethodError
-      write_attribute key, value
+      write_liner key, value
     end
 
-    def hash
-      keys.inject({}) { |h,k| h[k] = self[k]; h }.freeze
+    def liner
+      liner_keys.inject({}) { |h,k| h[k] = self[k]; h }.freeze
     end
 
-    def hash=(hash)
+    def liner=(hash)
       hash.each { |k,v| self[k] = hash[k] }
     end
 
-    def values=(values)
+    def liner_values=(values)
       values.each_with_index do |value, i|
-        write_attribute(keys[i], value)
+        write_liner(liner_keys[i], value)
       end
     end
 
     def to_h
-      hash.dup
+      liner.dup
     end
     alias :to_hash :to_h
     

@@ -8,10 +8,10 @@ describe Liner do
       [Beer, Pizza, Burger, Cheeseburger].all?{|klass| klass.is_a? Class }
     end
 
-    it "should define keys" do
-      beer.keys.must_equal   [:hops, :yeast]
-      pizza.keys.must_equal  [:crust, :sauce]
-      cheeseburger.keys.must_equal [:bun, :meat, :cheese]
+    it "should define liner_keys" do
+      beer.liner_keys.must_equal   [:hops, :yeast]
+      pizza.liner_keys.must_equal  [:crust, :sauce]
+      cheeseburger.liner_keys.must_equal [:bun, :meat, :cheese]
     end
 
     it "should define attribute getters" do

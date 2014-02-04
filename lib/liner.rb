@@ -20,18 +20,23 @@ end
 
 def Liner.apply(base, *keys)
   keys = keys.map(&:to_sym).uniq.freeze
-  base.class_eval do
-    define_method :keys do
-      begin
-        (super() + keys).uniq
-      rescue NoMethodError
-        keys
-      end
+
+  base.send(:define_method, :liner_keys) do
+    begin
+      (super() + keys).uniq
+    rescue NoMethodError
+      keys
     end
-    include Liner
-    keys.each do |key|
-      define_method(key){ read_attribute(key) }
-      define_method("#{key}="){ |value| write_attribute(key, value) }
+  end
+
+  base.send :include, Liner unless base < Liner
+
+  keys.each do |key|
+    unless base.method_defined? key
+      base.send(:define_method, key){ read_liner(key) }
+    end
+    unless base.method_defined? "#{key}="
+      base.send(:define_method, "#{key}="){ |value| write_liner(key, value) }
     end
   end
   base

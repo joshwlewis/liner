@@ -15,14 +15,14 @@ describe Liner::Hashable do
     ->{ subject[:foo] = 'bar' }.must_raise ArgumentError
   end
 
-  it "hash should be a hash of attributes" do
-    subject.hash.must_equal({ hops: 'Cascade', yeast: nil })
+  it "liner should be a hash of attributes" do
+    subject.liner.must_equal({ hops: 'Cascade', yeast: nil })
   end
 
-  it "hash= should set the attributes" do
+  it "liner= should set the attributes" do
     hash = {hops: 'Columbus', yeast: 'Bottom Fermenting' }
-    subject.hash = hash
-    subject.hash.must_equal(hash)
+    subject.liner = hash
+    subject.liner.must_equal(hash)
   end
 
   it "#to_h should return the attribute hash" do
