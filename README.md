@@ -1,9 +1,12 @@
 # Liner
 
-Lay a liner for your Ruby classes. Liner is designed to enhance simple classes
-with some common idioms and stay out of your way.
+Lay a liner for your Ruby classes. Liner is a lightweight library designed to 
+enhance simple classes with some conveniences and idioms while staying out of 
+your way.
 
 ## Usage
+
+### Setup
 
 You can setup a Liner based class in any of these equivalent ways:
 
@@ -21,8 +24,11 @@ class Engine
 end
 ```
 
+### Initialization
+
 Your new class comes with an initializer that takes values in the order you
 defined them.
+
 ```ruby
 e = Engine.new('V6', 'gasoline')
 # => #<Engine layout="V6", fuel="gasoline">
@@ -33,6 +39,8 @@ e = Engine.new(layout: 'V8', fuel: "gasoline")
 # => #<Engine layout="V8", fuel="gasoline">
 ```
 
+### Attributes
+
 Attribute getters and setters are built in.
 ```ruby
 e.fuel            # => "gasoline"
@@ -40,24 +48,50 @@ e.fuel = "diesel" # => "diesel"
 ```
 
 Attributes are accessible via hash style lookup too.
+
 ```ruby
 e[:layout]        # => "V8"
 e[:layout] = "V6" # => "V6"
 e[:foo] = "Bar"   # => ArgumentError: Invalid liner attribute: 'foo'
 ```
 
-Equality methods are also availble.
+If you want a full attribute hash, we have that (`to_h` and `to_hash` also work).
+
+```ruby
+e.liner # => { :layout => 'V6', :fuel => 'diesel' }
+```
+
+### Inspection
+
+It's always nice not to have to set up inspection (note that `to_s` is the same
+here).
+
+```
+e.inspect
+# => #<Engine layout="V6", fuel="gasoline">
+```
+
+### Equality
+
+Normal equality methods are here.
 ```ruby
 e.eql? Engine.new(layout: 'I4')               # => false
 e == Engine.new(layout: 'V6', fuel: 'diesel') # => true
 ```
 
-If you want an attribute hash, we have that.
+### Serialization
+
+JSON serialization is ready after you require it.
 
 ```ruby
-e.to_hash # => { :layout => 'V6', :fuel => 'diesel' }
+require 'json'
+e.to_json
+# => "{\"layout\":\"V6\",\"fuel\":\"gasoline\"}"
 ```
 
+### Overriding
+
+#### Getters/Readers
 If you want to customize the way an attribute is read, just override the method
 like you would any accessor. You can access the raw value through either the instance variable,
 `read_attribute`, or `super`.
@@ -84,10 +118,11 @@ taco = Taco.new("ground beef")
 # => #<Taco filling="Steak">
 taco[:filling] = 'unknown fish'
 # => 'unknown fish'
-taco.hash
+taco.liner
 # => {:filling=>"Atlantic Cod"}
 ```
 
+#### Setters/Writers
 It's the same scenario for customizing the writer. Set the real value
 through the instance variable, `write_attribute`, or `super`.
 
@@ -99,10 +134,7 @@ class Bacon < Liner.new(:is_good)
 end
 ```
 
-Again, the overridden method takes precendence, even with writers (like
-`taco[:is_good] = false`).
-
-
+Again, the overridden method takes precendence, even with writers.
 
 ```ruby
 generic_bacon = Bacon.new
@@ -110,6 +142,23 @@ generic_bacon[:is_good] = false
 # => true
 ```
 
+### Inheritance
+
+Inheritance of Liner classes works like any other Ruby class, but you can tack
+on extra attributes to child classes if you like.
+
+```ruby
+class Instrument
+  liner :key
+end
+
+class Guitar < Instrument
+  liner :strings
+end
+
+Guitar.new('C', 6)
+# => #<Guitar key="C", strings=6>
+```
 
 ## Installation
 
