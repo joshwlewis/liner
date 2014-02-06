@@ -1,10 +1,8 @@
 module Liner
   module Base
     def initialize(*args)
-      # initialize by a hash
       if args.count == 1 && args.first.respond_to?(:keys)
         self.liner = args.first
-      # initialize by ordered values
       elsif args.count >= 1 && args.count <= liner_keys.count
         self.liner_values = args
       end
@@ -13,14 +11,14 @@ module Liner
 
   private
 
-  def read_liner(key)
+  def liner_get(key)
     key = key.to_sym
     with_valid_attribute(key) do
       instance_variable_get "@#{key}"
     end
   end
 
-  def write_liner(key, value)
+  def liner_set(key, value)
     key = key.to_sym
     with_valid_attribute(key) do
       instance_variable_set "@#{key}", value

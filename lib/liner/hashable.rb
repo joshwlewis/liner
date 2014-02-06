@@ -4,13 +4,13 @@ module Liner
     def [](key)
       send key.to_sym
     rescue NoMethodError
-      read_liner key
+      liner_get key
     end
 
     def []=(key,value)
       send :"#{key}=", value
     rescue NoMethodError
-      write_liner key, value
+      liner_set key, value
     end
 
     def liner
@@ -23,7 +23,7 @@ module Liner
 
     def liner_values=(values)
       values.each_with_index do |value, i|
-        write_liner(liner_keys[i], value)
+        self[liner_keys[i]] = value
       end
     end
 

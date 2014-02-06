@@ -7,6 +7,8 @@ require 'liner/serializable'
 require 'ext/class'
 
 module Liner
+  # include all submodules when included
+  # @api public
   def self.included(base)
     [Base, Hashable, Equalizable, Inspectable, Serializable].each do |mod|
       base.send :include, mod
@@ -14,11 +16,21 @@ module Liner
   end
 end
 
+# Setup an anonymous class with liner keys
+# @param keys [Array] An array of symbols or strings which will serve as attributes
+# @return [Class]
+# @example Liner.new(:foo) # => #<Class:0x007fd0993bab98>
+# @api public
 def Liner.new(*keys)
-  apply Class.new, *keys
+  apply! Class.new, *keys
 end
 
-def Liner.apply(base, *keys)
+# Apply a liner to a given class
+# @param base [Class] A class to add a liner to
+# @param keys [Array] An array of symbols or strings which will serve as attributes
+# @return [Class] The class with a liner installed
+# @api public
+def Liner.apply!(base, *keys)
   keys = keys.map(&:to_sym).uniq.freeze
 
   base.send(:define_method, :liner_keys) do
@@ -33,10 +45,10 @@ def Liner.apply(base, *keys)
 
   keys.each do |key|
     unless base.method_defined? key
-      base.send(:define_method, key){ read_liner(key) }
+      base.send(:define_method, key){ liner_get key }
     end
     unless base.method_defined? "#{key}="
-      base.send(:define_method, "#{key}="){ |value| write_liner(key, value) }
+      base.send(:define_method, "#{key}="){ |value| liner_set key, value }
     end
   end
   base
