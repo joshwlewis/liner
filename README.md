@@ -1,4 +1,8 @@
 # Liner
+[![Build Status](https://travis-ci.org/joshwlewis/liner.png?branch=master)](https://travis-ci.org/joshwlewis/liner)
+[![Gem Version](https://badge.fury.io/rb/liner.png)](http://badge.fury.io/rb/liner)
+[![Dependency Status](https://gemnasium.com/joshwlewis/liner.png)](https://gemnasium.com/joshwlewis/liner)
+[![Code Climate](https://codeclimate.com/github/joshwlewis/liner.png)](https://codeclimate.com/github/joshwlewis/liner)
 
 Lay a liner for your Ruby classes. Liner is a lightweight library designed to 
 enhance simple classes with some conveniences and idioms while staying out of 
