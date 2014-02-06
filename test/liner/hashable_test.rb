@@ -6,6 +6,10 @@ describe Liner::Hashable do
     subject[:yeast].must_equal nil
   end
 
+  it "[] should not read invalid attributes" do
+    ->{ subject[:foo] }.must_raise ArgumentError
+  end
+
   it "#[]= should set attributes" do
     subject[:yeast]= "Top Fermenting"
     subject.yeast.must_equal "Top Fermenting"
