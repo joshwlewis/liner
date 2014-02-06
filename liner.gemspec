@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Liner::VERSION
   spec.authors       = ["Josh Lewis"]
   spec.email         = ["josh.w.lewis@gmail.com"]
-  spec.description   = %q{A liner for Ruby objects. Add attribute, inspection, and equality methods.}
-  spec.summary       = %q{A liner for Ruby objects. Add attribute, inspection, and equality methods.}
+  spec.description   = %q{A liner for Ruby objects. Add attribute, inspection, serialization, and equality methods.}
+  spec.summary       = %q{Liner is a lightweight library designed to enhance simple classes with a few conveniences and idioms while staying out of your way.}
   spec.homepage      = "https://github.com/joshwlewis/liner"
   spec.license       = "MIT"
 
@@ -21,4 +21,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "minitest"
+  spec.add_development_dependency "coveralls"
 end

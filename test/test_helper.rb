@@ -1,7 +1,9 @@
+require 'coveralls'
+Coveralls.wear!
+
 require 'minitest/autorun'
 require 'minitest/pride'
 require 'liner'
-
 
 # create some dummy classes to test against with each of the supported usages.
 
