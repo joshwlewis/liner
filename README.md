@@ -1,5 +1,6 @@
 # Liner
 [![Build Status](https://travis-ci.org/joshwlewis/liner.png?branch=master)](https://travis-ci.org/joshwlewis/liner)
+[![Coverage Status](https://coveralls.io/repos/joshwlewis/liner/badge.png?branch=master)](https://coveralls.io/r/joshwlewis/liner?branch=master)
 [![Gem Version](https://badge.fury.io/rb/liner.png)](http://badge.fury.io/rb/liner)
 [![Dependency Status](https://gemnasium.com/joshwlewis/liner.png)](https://gemnasium.com/joshwlewis/liner)
 [![Code Climate](https://codeclimate.com/github/joshwlewis/liner.png)](https://codeclimate.com/github/joshwlewis/liner)
@@ -22,6 +23,7 @@ Engine = Liner.new(:layout, :fuel)
 class Engine < Liner.new(:layout, :fuel)
 end
 ```
+
 ```ruby
 class Engine
   liner :layout, :fuel
@@ -70,7 +72,7 @@ e.liner # => { :layout => 'V6', :fuel => 'diesel' }
 It's always nice not to have to set up inspection (note that `to_s` is the same
 here).
 
-```
+```ruby
 e.inspect
 # => #<Engine layout="V6", fuel="gasoline">
 ```
