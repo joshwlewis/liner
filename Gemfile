@@ -1,4 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'pry'
 gemspec
+
+gem 'pry'
+gem 'yard'

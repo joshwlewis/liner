@@ -100,7 +100,7 @@ e.to_json
 #### Getters/Readers
 If you want to customize the way an attribute is read, just override the method
 like you would any accessor. You can access the raw value through either the instance variable,
-`read_attribute`, or `super`.
+`liner_get`, or `super`.
 
 ```ruby
 class Taco < Liner.new(:filling)
@@ -130,7 +130,7 @@ taco.liner
 
 #### Setters/Writers
 It's the same scenario for customizing the writer. Set the real value
-through the instance variable, `write_attribute`, or `super`.
+through the instance variable, `liner_set`, or `super`.
 
 ```ruby
 class Bacon < Liner.new(:is_good)
