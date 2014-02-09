@@ -61,16 +61,24 @@ e[:layout] = "V6" # => "V6"
 e[:foo] = "Bar"   # => ArgumentError: Invalid liner attribute: 'foo'
 ```
 
-If you want a full attribute hash, we have that (`to_h` and `to_hash` also work).
+If you want a full attribute hash, we have that.
 
 ```ruby
 e.liner # => { :layout => 'V6', :fuel => 'diesel' }
 ```
 
+You can set attributes en masse by sending an array or hash.
+
+```ruby
+e.liner = { layout: 'I4', fuel: 'biofuel' }
+```
+```ruby
+e.liner_values = ['I4', 'biofuel']
+```
+
 ### Inspection
 
-It's always nice not to have to set up inspection (note that `to_s` is the same
-here).
+A nice inspection method is always handy.
 
 ```ruby
 e.inspect
@@ -105,7 +113,7 @@ like you would any accessor. You can access the raw value through either the ins
 ```ruby
 class Taco < Liner.new(:filling)
   def filling
-    if read_liner(:filling) == 'ground beef'
+    if liner_get(:filling) == 'ground beef'
       'Steak'
     elsif @filling == 'unknown fish'
       'Atlantic Cod'
