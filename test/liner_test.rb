@@ -9,9 +9,9 @@ describe Liner do
     end
 
     it "should define liner_keys" do
-      beer.liner_keys.must_equal   [:hops, :yeast]
-      pizza.liner_keys.must_equal  [:crust, :sauce]
-      cheeseburger.liner_keys.must_equal [:bun, :meat, :cheese]
+      Beer.liner_keys.must_equal   [:hops, :yeast]
+      Pizza.liner_keys.must_equal  [:crust, :sauce]
+      Cheeseburger.liner_keys.must_equal [:bun, :meat, :cheese]
     end
 
     it "should define attribute getters" do

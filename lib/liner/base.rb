@@ -46,4 +46,10 @@ module Liner
       raise ArgumentError, "Invalid liner attribute: '#{key}'"
     end
   end
+
+  # Delegate liner keys to the singleton class method
+  # @api private
+  def liner_keys
+    self.class.liner_keys
+  end
 end
