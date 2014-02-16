@@ -174,6 +174,23 @@ Guitar.new('C', 6)
 # => #<Guitar key="C", strings=6>
 ```
 
+### Supported Ruby Versions
+
+This library aims to support and is tested against the following Ruby
+implementations:
+
+* Ruby 1.9.3
+* Ruby 2.0.0
+* Ruby 2.1.0
+* [JRuby](http://jruby.org/)
+* [Rubinius](http://rubini.us/)
+
+If something doesn't work on one of these versions, it's a bug.
+
+This library may inadvertently work (or seem to work) on other Ruby versions or
+implementations, however support will only be provided for the implementations
+listed above.
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -187,8 +204,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install liner
-
-
 
 ## Contributing
 
