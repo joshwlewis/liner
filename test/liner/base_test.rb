@@ -1,7 +1,7 @@
 describe Liner::Base do
   describe :initialize do
     it "should accept key/value pairs" do
-      beer = Beer.new(hops: 'Cascade', yeast: 'Top Fermenting')
+      beer = Beer.new(:hops => 'Cascade', :yeast => 'Top Fermenting')
       beer.hops.must_equal 'Cascade'
       beer.yeast.must_equal 'Top Fermenting'
     end

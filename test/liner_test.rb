@@ -1,8 +1,8 @@
 describe Liner do
   describe :new do
-    let(:beer)  { Beer.new(hops: 'columbus') }
-    let(:pizza) { Pizza.new(crust: 'thin') }
-    let(:cheeseburger){ Cheeseburger.new(bun: 'sesame') }
+    let(:beer)  { Beer.new(:hops => 'columbus') }
+    let(:pizza) { Pizza.new(:crust => 'thin') }
+    let(:cheeseburger){ Cheeseburger.new(:bun => 'sesame') }
 
     it "should create a new class" do
       [Beer, Pizza, Burger, Cheeseburger].all?{|klass| klass.is_a? Class }

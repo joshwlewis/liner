@@ -25,7 +25,9 @@ module Liner
   def Liner.apply!(base, *keys)
     keys = keys.map(&:to_sym).uniq
 
-    base.send(:define_singleton_method, :liner_keys) do
+    singleton = (class << base; self; end)
+
+    singleton.send(:define_method, :liner_keys) do
       @liner_keys ||= begin
         super() + keys
       rescue NoMethodError

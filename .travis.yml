@@ -2,12 +2,13 @@ language: ruby
 cache: bundler
 bundler_args: --without yard pry
 rvm:
+  - ree
+  - 1.8.7
   - 1.9.2
   - 1.9.3
   - 2.0.0
   - 2.1.0
   - ruby-head
-  - rbx
   - rbx-2
 matrix:
   include:
@@ -15,7 +16,7 @@ matrix:
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
     - rvm: jruby-head
       env: JRUBY_OPTS="$JRUBY_OPTS --debug"
-  allow_failure:
+  allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
   fast_finish: true
